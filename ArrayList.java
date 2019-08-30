@@ -76,7 +76,8 @@ import sun.misc.SharedSecrets;
  * @see     Vector
  * @since   1.2
  */
-
+//TODO ArrayList 运行添加空指针？
+    //TODO ArrayList 各个操作时间复杂度分析
 public class ArrayList<E> extends AbstractList<E>
         implements List<E>, RandomAccess, Cloneable, java.io.Serializable
 {
@@ -246,6 +247,7 @@ public class ArrayList<E> extends AbstractList<E>
         // overflow-conscious code
         int oldCapacity = elementData.length;
         // newCapacity值等于原数组长度*1.5
+        //如果内部数组原来为空，则newCapacity=0
         int newCapacity = oldCapacity + (oldCapacity >> 1);
         // 如果原来数组长度为0,下面这个if判断会成立
         // 这种情况成立应该是使用默认构造器，并第一次添加元素
@@ -474,6 +476,7 @@ public class ArrayList<E> extends AbstractList<E>
 
         ensureCapacityInternal(size + 1);  // Increments modCount!!
         //把index指向的元素及其后面元素 后移一位
+        //调用API 移动数组
         System.arraycopy(elementData, index, elementData, index + 1,
                          size - index);
         elementData[index] = element;
@@ -578,6 +581,7 @@ public class ArrayList<E> extends AbstractList<E>
         Object[] a = c.toArray();
         int numNew = a.length;
         ensureCapacityInternal(size + numNew);  // Increments modCount
+        //TODO arraycopy的用法
         System.arraycopy(a, 0, elementData, size, numNew);
         size += numNew;
         return numNew != 0;
