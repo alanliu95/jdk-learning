@@ -121,6 +121,8 @@ public class ArrayList<E> extends AbstractList<E>
      * @throws IllegalArgumentException if the specified initial capacity
      *         is negative
      */
+    //该构造器指定初始容量
+    //若实参为0，成员变量elementData指向了EMPTY_ELEMENTDATA对应的空数组
     public ArrayList(int initialCapacity) {
         if (initialCapacity > 0) {
             this.elementData = new Object[initialCapacity];
@@ -135,6 +137,8 @@ public class ArrayList<E> extends AbstractList<E>
     /**
      * Constructs an empty list with an initial capacity of ten.
      */
+    //调用默认构造器，内部数组引用 指向一个已存在的空数组
+    //在添加元素的时候，才检查数组容量是否满足，如果是空数组，会生成长度为10的数组
     public ArrayList() {
         this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
     }
@@ -147,6 +151,7 @@ public class ArrayList<E> extends AbstractList<E>
      * @param c the collection whose elements are to be placed into this list
      * @throws NullPointerException if the specified collection is null
      */
+    //若实参长度为0，成员变量elementData指向了EMPTY_ELEMENTDATA对应的空数组
     public ArrayList(Collection<? extends E> c) {
         elementData = c.toArray();
         if ((size = elementData.length) != 0) {
@@ -155,6 +160,7 @@ public class ArrayList<E> extends AbstractList<E>
                 elementData = Arrays.copyOf(elementData, size, Object[].class);
         } else {
             // replace with empty array.
+            // ArrayList有两个静态变量，都指向空数组，这样做的目的是什么，可不可以只用一个
             this.elementData = EMPTY_ELEMENTDATA;
         }
     }
@@ -193,8 +199,12 @@ public class ArrayList<E> extends AbstractList<E>
         }
     }
 
+    //这个方法主要用来检查 是否 是使用默认构造器生成的List实例第一次添加元素
+    //如果是直接返回默认数组容量，否则返回实际所需容量
+    //如果实际所需容量（当前size+1）小于内部数组容量，不需要扩容
     private static int calculateCapacity(Object[] elementData, int minCapacity) {
-        //判断list是否是使用默认构造器生成，并且此时是第一次添加元素
+        //判断该list实例是否是使用默认构造器生成，并且此时是第一次添加元素
+        //默认构造器，将内部数组变量指向DEFAULTCAPACITY_EMPTY_ELEMENTDATA
         if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
             //如果是，返回默认容量大小10
             return Math.max(DEFAULT_CAPACITY, minCapacity);
@@ -203,8 +213,8 @@ public class ArrayList<E> extends AbstractList<E>
         return minCapacity;
     }
 
-    //该方法调用可能会导致内部数组扩容，该方法在add() 方法中被调用，传入参数值为 size +1,
-    //因为此时列表 需要添加元素，所有所需最小容量变为size+1
+    //该方法调用可能会导致内部数组扩容，该方法在add() 方法中被调用，传入参数值为当前 size +1,
+    //因为此时列表 需要添加元素，所以所需最小容量变为size+1
     private void ensureCapacityInternal(int minCapacity) {
         ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));
     }
@@ -235,12 +245,13 @@ public class ArrayList<E> extends AbstractList<E>
     private void grow(int minCapacity) {
         // overflow-conscious code
         int oldCapacity = elementData.length;
-        // newCapacity值等于就原数组长度*1.5
+        // newCapacity值等于原数组长度*1.5
         int newCapacity = oldCapacity + (oldCapacity >> 1);
         // 如果原来数组长度为0,下面这个if判断会成立
-        // 这种情况应该是使用默认构造器，并第一次添加元素
+        // 这种情况成立应该是使用默认构造器，并第一次添加元素
         if (newCapacity - minCapacity < 0)
             newCapacity = minCapacity;
+        //控制内部数组的最大长度
         if (newCapacity - MAX_ARRAY_SIZE > 0)
             newCapacity = hugeCapacity(minCapacity);
         //使用了Arrays中静态方法，生成新数组，并完成拷贝工作
@@ -428,6 +439,7 @@ public class ArrayList<E> extends AbstractList<E>
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public E set(int index, E element) {
+        //检查索引是否超过size
         rangeCheck(index);
 
         E oldValue = elementData(index);
@@ -456,10 +468,12 @@ public class ArrayList<E> extends AbstractList<E>
      * @param element element to be inserted
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
+    //在中间插入元素，第一个参数是索引，该索引不能大于size,可以等于
     public void add(int index, E element) {
         rangeCheckForAdd(index);
 
         ensureCapacityInternal(size + 1);  // Increments modCount!!
+        //把index指向的元素及其后面元素 后移一位
         System.arraycopy(elementData, index, elementData, index + 1,
                          size - index);
         elementData[index] = element;
