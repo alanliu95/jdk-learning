@@ -23,13 +23,13 @@
  *
  */
 
-package java.util;
+import java.util.*;
 import java.io.*;
 
 /**
  * Hash table based implementation of the <tt>Map</tt> interface.  This
  * implementation provides all of the optional map operations, and permits
- * <tt>null</tt> values and the <tt>null</tt> key.  (The <tt>HashMap</tt>
+ * <tt>null</tt> values and the <tt>null</tt> key.  (The <tt>HashMap17</tt>
  * class is roughly equivalent to <tt>Hashtable</tt>, except that it is
  * unsynchronized and permits nulls.)  This class makes no guarantees as to
  * the order of the map; in particular, it does not guarantee that the order
@@ -42,7 +42,7 @@ import java.io.*;
  * operations (<tt>get</tt> and <tt>put</tt>), assuming the hash function
  * disperses the elements properly among the buckets.  Iteration over
  * collection views requires time proportional to the "capacity" of the
- * <tt>HashMap</tt> instance (the number of buckets) plus its size (the number
+ * <tt>HashMap17</tt> instance (the number of buckets) plus its size (the number
  * of key-value mappings).  Thus, it's very important not to set the initial
  * capacity too high (or the load factor too low) if iteration performance is
  * important.
@@ -51,7 +51,7 @@ import java.io.*;
  * 操作的性能对你来说是重要的，那么请不要将map的初始容量设置的过大(或者装填因子设置得
  * 过低)。
  *
- * <p>An instance of <tt>HashMap</tt> has two parameters that affect its
+ * <p>An instance of <tt>HashMap17</tt> has two parameters that affect its
  * performance: <i>initial capacity</i> and <i>load factor</i>.  The
  * <i>capacity</i> is the number of buckets in the hash table, and the initial
  * capacity is simply the capacity at the time the hash table is created.  The
@@ -66,14 +66,14 @@ import java.io.*;
  * <p>As a general rule, the default load factor (.75) offers a good tradeoff
  * between time and space costs.  Higher values decrease the space overhead
  * but increase the lookup cost (reflected in most of the operations of the
- * <tt>HashMap</tt> class, including <tt>get</tt> and <tt>put</tt>).  The
+ * <tt>HashMap17</tt> class, including <tt>get</tt> and <tt>put</tt>).  The
  * expected number of entries in the map and its load factor should be taken
  * into account when setting its initial capacity, so as to minimize the
  * number of rehash operations.  If the initial capacity is greater
  * than the maximum number of entries divided by the load factor, no
  * rehash operations will ever occur.
  *
- * <p>If many mappings are to be stored in a <tt>HashMap</tt> instance,
+ * <p>If many mappings are to be stored in a <tt>HashMap17</tt> instance,
  * creating it with a sufficiently large capacity will allow the mappings to
  * be stored more efficiently than letting it perform automatic rehashing as
  * needed to grow the table.
@@ -94,7 +94,7 @@ import java.io.*;
  * {@link Collections#synchronizedMap Collections.synchronizedMap}
  * method.  This is best done at creation time, to prevent accidental
  * unsynchronized access to the map:<pre>
- *   Map m = Collections.synchronizedMap(new HashMap(...));</pre>
+ *   Map m = Collections.synchronizedMap(new HashMap17(...));</pre>
  * 可以使用Collections.synchronizedMap来为map添加同步功能。
  *
  * <p>The iterators returned by all of this class's "collection view methods"
@@ -134,7 +134,7 @@ import java.io.*;
  * @since   1.2
  */
 
-public class HashMap<K,V>
+public class HashMap17<K,V>
         extends AbstractMap<K,V>
         implements Map<K,V>, Cloneable, Serializable
 {
@@ -187,11 +187,11 @@ public class HashMap<K,V>
     final float loadFactor;
 
     /**
-     * The number of times this HashMap has been structurally modified
+     * The number of times this HashMap17 has been structurally modified
      * Structural modifications are those that change the number of mappings in
-     * the HashMap or otherwise modify its internal structure (e.g.,
+     * the HashMap17 or otherwise modify its internal structure (e.g.,
      * rehash).  This field is used to make iterators on Collection-views of
-     * the HashMap fail-fast.  (See ConcurrentModificationException).
+     * the HashMap17 fail-fast.  (See ConcurrentModificationException).
      */
     transient int modCount;
 
@@ -252,7 +252,7 @@ public class HashMap<K,V>
     transient int hashSeed = 0;
 
     /**
-     * Constructs an empty <tt>HashMap</tt> with the specified initial
+     * Constructs an empty <tt>HashMap17</tt> with the specified initial
      * capacity and load factor.
      *
      * @param  initialCapacity the initial capacity
@@ -260,7 +260,7 @@ public class HashMap<K,V>
      * @throws IllegalArgumentException if the initial capacity is negative
      *         or the load factor is nonpositive
      */
-    public HashMap(int initialCapacity, float loadFactor) {
+    public HashMap17(int initialCapacity, float loadFactor) {
         if (initialCapacity < 0)
             throw new IllegalArgumentException("Illegal initial capacity: " +
                     initialCapacity);
@@ -276,34 +276,34 @@ public class HashMap<K,V>
     }
 
     /**
-     * Constructs an empty <tt>HashMap</tt> with the specified initial
+     * Constructs an empty <tt>HashMap17</tt> with the specified initial
      * capacity and the default load factor (0.75).
      *
      * @param  initialCapacity the initial capacity.
      * @throws IllegalArgumentException if the initial capacity is negative.
      */
-    public HashMap(int initialCapacity) {
+    public HashMap17(int initialCapacity) {
         this(initialCapacity, DEFAULT_LOAD_FACTOR);
     }
 
     /**
-     * Constructs an empty <tt>HashMap</tt> with the default initial capacity
+     * Constructs an empty <tt>HashMap17</tt> with the default initial capacity
      * (16) and the default load factor (0.75).
      */
-    public HashMap() {
+    public HashMap17() {
         this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);
     }
 
     /**
-     * Constructs a new <tt>HashMap</tt> with the same mappings as the
-     * specified <tt>Map</tt>.  The <tt>HashMap</tt> is created with
+     * Constructs a new <tt>HashMap17</tt> with the same mappings as the
+     * specified <tt>Map</tt>.  The <tt>HashMap17</tt> is created with
      * default load factor (0.75) and an initial capacity sufficient to
      * hold the mappings in the specified <tt>Map</tt>.
      *
      * @param   m the map whose mappings are to be placed in this map
      * @throws  NullPointerException if the specified map is null
      */
-    public HashMap(Map<? extends K, ? extends V> m) {
+    public HashMap17(Map<? extends K, ? extends V> m) {
         this(Math.max((int) (m.size() / DEFAULT_LOAD_FACTOR) + 1,
                 DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR);
         inflateTable(threshold);
@@ -327,6 +327,7 @@ public class HashMap<K,V>
 
         threshold = (int) Math.min(capacity * loadFactor, MAXIMUM_CAPACITY + 1);
         table = new Entry[capacity];
+        //todo 该方法作用？
         initHashSeedAsNeeded(capacity);
     }
 
@@ -335,7 +336,7 @@ public class HashMap<K,V>
     /**
      * Initialization hook for subclasses. This method is called
      * in all constructors and pseudo-constructors (clone, readObject)
-     * after HashMap has been initialized but before any entries have
+     * after HashMap17 has been initialized but before any entries have
      * been inserted.  (In the absence of this method, readObject would
      * require explicit knowledge of subclasses.)
      */
@@ -362,7 +363,7 @@ public class HashMap<K,V>
     /**
      * Retrieve object hash code and applies a supplemental hash function to the
      * result hash, which defends against poor quality hash functions.  This is
-     * critical because HashMap uses power-of-two length hash tables, that
+     * critical because HashMap17 uses power-of-two length hash tables, that
      * otherwise encounter collisions for hashCodes that do not differ
      * in lower bits. Note: Null keys always map to hash 0, thus index 0.
      */
@@ -465,7 +466,7 @@ public class HashMap<K,V>
 
     /**
      * Returns the entry associated with the specified key in the
-     * HashMap.  Returns null if the HashMap contains no mapping
+     * HashMap17.  Returns null if the HashMap17 contains no mapping
      * for the key.
      */
     final Entry<K,V> getEntry(Object key) {
@@ -498,6 +499,7 @@ public class HashMap<K,V>
      *         previously associated <tt>null</tt> with <tt>key</tt>.)
      */
     public V put(K key, V value) {
+        //如果是第一次插入元素，需要先初始化内部backet数组
         if (table == EMPTY_TABLE) {
             inflateTable(threshold);
         }
@@ -673,7 +675,7 @@ public class HashMap<K,V>
 
     /**
      * Removes and returns the entry associated with the specified key
-     * in the HashMap.  Returns null if the HashMap contains no mapping
+     * in the HashMap17.  Returns null if the HashMap17 contains no mapping
      * for this key.
      */
     final Entry<K,V> removeEntryForKey(Object key) {
@@ -783,15 +785,15 @@ public class HashMap<K,V>
     }
 
     /**
-     * Returns a shallow copy of this <tt>HashMap</tt> instance: the keys and
+     * Returns a shallow copy of this <tt>HashMap17</tt> instance: the keys and
      * values themselves are not cloned.
      *
      * @return a shallow copy of this map
      */
     public Object clone() {
-        HashMap<K,V> result = null;
+        HashMap17<K,V> result = null;
         try {
-            result = (HashMap<K,V>)super.clone();
+            result = (HashMap17<K,V>)super.clone();
         } catch (CloneNotSupportedException e) {
             // assert false;
         }
@@ -800,7 +802,7 @@ public class HashMap<K,V>
                     (int) Math.min(
                             size * Math.min(1 / loadFactor, 4.0f),
                             // we have limits...
-                            HashMap.MAXIMUM_CAPACITY),
+                            HashMap17.MAXIMUM_CAPACITY),
                     table.length));
         }
         result.entrySet = null;
@@ -868,16 +870,16 @@ public class HashMap<K,V>
         /**
          * This method is invoked whenever the value in an entry is
          * overwritten by an invocation of put(k,v) for a key k that's already
-         * in the HashMap.
+         * in the HashMap17.
          */
-        void recordAccess(HashMap<K,V> m) {
+        void recordAccess(HashMap17<K,V> m) {
         }
 
         /**
          * This method is invoked whenever the entry is
          * removed from the table.
          */
-        void recordRemoval(HashMap<K,V> m) {
+        void recordRemoval(HashMap17<K,V> m) {
         }
     }
 
@@ -903,7 +905,7 @@ public class HashMap<K,V>
      * as part of Map construction or "pseudo-construction" (cloning,
      * deserialization).  This version needn't worry about resizing the table.
      *
-     * Subclass overrides this to alter the behavior of HashMap(Map),
+     * Subclass overrides this to alter the behavior of HashMap17(Map),
      * clone, and readObject.
      */
     void createEntry(int hash, K key, V value, int bucketIndex) {
@@ -954,7 +956,7 @@ public class HashMap<K,V>
                 throw new ConcurrentModificationException();
             Object k = current.key;
             current = null;
-            HashMap.this.removeEntryForKey(k);
+            HashMap17.this.removeEntryForKey(k);
             expectedModCount = modCount;
         }
     }
@@ -1022,10 +1024,10 @@ public class HashMap<K,V>
             return containsKey(o);
         }
         public boolean remove(Object o) {
-            return HashMap.this.removeEntryForKey(o) != null;
+            return HashMap17.this.removeEntryForKey(o) != null;
         }
         public void clear() {
-            HashMap.this.clear();
+            HashMap17.this.clear();
         }
     }
 
@@ -1058,7 +1060,7 @@ public class HashMap<K,V>
             return containsValue(o);
         }
         public void clear() {
-            HashMap.this.clear();
+            HashMap17.this.clear();
         }
     }
 
@@ -1105,15 +1107,15 @@ public class HashMap<K,V>
             return size;
         }
         public void clear() {
-            HashMap.this.clear();
+            HashMap17.this.clear();
         }
     }
 
     /**
-     * Save the state of the <tt>HashMap</tt> instance to a stream (i.e.,
+     * Save the state of the <tt>HashMap17</tt> instance to a stream (i.e.,
      * serialize it).
      *
-     * @serialData The <i>capacity</i> of the HashMap (the length of the
+     * @serialData The <i>capacity</i> of the HashMap17 (the length of the
      *             bucket array) is emitted (int), followed by the
      *             <i>size</i> (an int, the number of key-value
      *             mappings), followed by the key (Object) and value (Object)
@@ -1148,7 +1150,7 @@ public class HashMap<K,V>
     private static final long serialVersionUID = 362498820763181265L;
 
     /**
-     * Reconstitute the {@code HashMap} instance from a stream (i.e.,
+     * Reconstitute the {@code HashMap17} instance from a stream (i.e.,
      * deserialize it).
      */
     private void readObject(java.io.ObjectInputStream s)
@@ -1177,7 +1179,7 @@ public class HashMap<K,V>
         int capacity = (int) Math.min(
                 mappings * Math.min(1 / loadFactor, 4.0f),
                 // we have limits...
-                HashMap.MAXIMUM_CAPACITY);
+                HashMap17.MAXIMUM_CAPACITY);
 
         // allocate the bucket array;
         if (mappings > 0) {
@@ -1188,7 +1190,7 @@ public class HashMap<K,V>
 
         init();  // Give subclass a chance to do its thing.
 
-        // Read the keys and values, and put the mappings in the HashMap
+        // Read the keys and values, and put the mappings in the HashMap17
         for (int i = 0; i < mappings; i++) {
             K key = (K) s.readObject();
             V value = (V) s.readObject();
@@ -1200,156 +1202,3 @@ public class HashMap<K,V>
     int   capacity()     { return table.length; }
     float loadFactor()   { return loadFactor;   }
 }
-
-
-    public V put(K key, V value) {
-        return putVal(hash(key), key, value, false, true);
-    }
-
-    // 第三个参数 onlyIfAbsent 如果是 true，那么只有在不存在该 key 时才会进行 put 操作
-// 第四个参数 evict 我们这里不关心
-    final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
-                   boolean evict) {
-        Node<K,V>[] tab; Node<K,V> p; int n, i;
-        // 第一次 put 值的时候，会触发下面的 resize()，类似 java7 的第一次 put 也要初始化数组长度
-        // 第一次 resize 和后续的扩容有些不一样，因为这次是数组从 null 初始化到默认的 16 或自定义的初始容量
-        if ((tab = table) == null || (n = tab.length) == 0)
-            n = (tab = resize()).length;
-        // 找到具体的数组下标，如果此位置没有值，那么直接初始化一下 Node 并放置在这个位置就可以了
-        if ((p = tab[i = (n - 1) & hash]) == null)
-            tab[i] = newNode(hash, key, value, null);
-
-        else {// 数组该位置有数据
-            Node<K,V> e; K k;
-            // 首先，判断该位置的第一个数据和我们要插入的数据，key 是不是"相等"，如果是，取出这个节点
-            if (p.hash == hash &&
-                    ((k = p.key) == key || (key != null && key.equals(k))))
-                e = p;
-                // 如果该节点是代表红黑树的节点，调用红黑树的插值方法，本文不展开说红黑树
-            else if (p instanceof TreeNode)
-                e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);
-            else {
-                // 到这里，说明数组该位置上是一个链表
-                for (int binCount = 0; ; ++binCount) {
-                    // 插入到链表的最后面(Java7 是插入到链表的最前面)
-                    if ((e = p.next) == null) {
-                        p.next = newNode(hash, key, value, null);
-                        // TREEIFY_THRESHOLD 为 8，所以，如果新插入的值是链表中的第 9 个
-                        // 会触发下面的 treeifyBin，也就是将链表转换为红黑树
-                        if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
-                            treeifyBin(tab, hash);
-                        break;
-                    }
-                    // 如果在该链表中找到了"相等"的 key(== 或 equals)
-                    if (e.hash == hash &&
-                            ((k = e.key) == key || (key != null && key.equals(k))))
-                        // 此时 break，那么 e 为链表中[与要插入的新值的 key "相等"]的 node
-                        break;
-                    p = e;
-                }
-            }
-            // e!=null 说明存在旧值的key与要插入的key"相等"
-            // 对于我们分析的put操作，下面这个 if 其实就是进行 "值覆盖"，然后返回旧值
-            if (e != null) {
-                V oldValue = e.value;
-                if (!onlyIfAbsent || oldValue == null)
-                    e.value = value;
-                afterNodeAccess(e);
-                return oldValue;
-            }
-        }
-        ++modCount;
-        // 如果 HashMap 由于新插入这个值导致 size 已经超过了阈值，需要进行扩容
-        if (++size > threshold)
-            resize();
-        afterNodeInsertion(evict);
-        return null;
-    }
-
-
-    final Node<K,V>[] resize() {
-        Node<K,V>[] oldTab = table;
-        int oldCap = (oldTab == null) ? 0 : oldTab.length;
-        int oldThr = threshold;
-        int newCap, newThr = 0;
-        if (oldCap > 0) { // 对应数组扩容
-            if (oldCap >= MAXIMUM_CAPACITY) {
-                threshold = Integer.MAX_VALUE;
-                return oldTab;
-            }
-            // 将数组大小扩大一倍
-            else if ((newCap = oldCap << 1) < MAXIMUM_CAPACITY &&
-                    oldCap >= DEFAULT_INITIAL_CAPACITY)
-                // 将阈值扩大一倍
-                newThr = oldThr << 1; // double threshold
-        }
-        else if (oldThr > 0) // 对应使用 new HashMap(int initialCapacity) 初始化后，第一次 put 的时候
-            newCap = oldThr;
-        else {// 对应使用 new HashMap() 初始化后，第一次 put 的时候
-            newCap = DEFAULT_INITIAL_CAPACITY;
-            newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
-        }
-
-        if (newThr == 0) {
-            float ft = (float)newCap * loadFactor;
-            newThr = (newCap < MAXIMUM_CAPACITY && ft < (float)MAXIMUM_CAPACITY ?
-                    (int)ft : Integer.MAX_VALUE);
-        }
-        threshold = newThr;
-
-        // 用新的数组大小初始化新的数组
-        Node<K,V>[] newTab = (Node<K,V>[])new Node[newCap];
-        table = newTab; // 如果是初始化数组，到这里就结束了，返回 newTab 即可
-
-        if (oldTab != null) {
-            // 开始遍历原数组，进行数据迁移。
-            for (int j = 0; j < oldCap; ++j) {
-                Node<K,V> e;
-                if ((e = oldTab[j]) != null) {
-                    oldTab[j] = null;
-                    // 如果该数组位置上只有单个元素，那就简单了，简单迁移这个元素就可以了
-                    if (e.next == null)
-                        newTab[e.hash & (newCap - 1)] = e;
-                        // 如果是红黑树，具体我们就不展开了
-                    else if (e instanceof TreeNode)
-                        ((TreeNode<K,V>)e).split(this, newTab, j, oldCap);
-                    else {
-                        // 这块是处理链表的情况，
-                        // 需要将此链表拆成两个链表，放到新的数组中，并且保留原来的先后顺序
-                        // loHead、loTail 对应一条链表，hiHead、hiTail 对应另一条链表，代码还是比较简单的
-                        Node<K,V> loHead = null, loTail = null;
-                        Node<K,V> hiHead = null, hiTail = null;
-                        Node<K,V> next;
-                        do {
-                            next = e.next;
-                            if ((e.hash & oldCap) == 0) {
-                                if (loTail == null)
-                                    loHead = e;
-                                else
-                                    loTail.next = e;
-                                loTail = e;
-                            }
-                            else {
-                                if (hiTail == null)
-                                    hiHead = e;
-                                else
-                                    hiTail.next = e;
-                                hiTail = e;
-                            }
-                        } while ((e = next) != null);
-                        if (loTail != null) {
-                            loTail.next = null;
-                            // 第一条链表
-                            newTab[j] = loHead;
-                        }
-                        if (hiTail != null) {
-                            hiTail.next = null;
-                            // 第二条链表的新的位置是 j + oldCap，这个很好理解
-                            newTab[j + oldCap] = hiHead;
-                        }
-                    }
-                }
-            }
-        }
-        return newTab;
-    }
